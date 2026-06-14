@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Agenda Fácil - Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="app gradient-bg" id="app">
+    <header class="header">
+      <div class="brand">Agenda Fácil</div>
+      <div class="header-actions">
+        <input id="search" class="search" placeholder="Pesquisar agendamentos..." />
+        <button id="themeToggle" class="icon-btn" aria-label="Tema"><i class="fa-solid fa-moon"></i></button>
+        <a href="cadastro.html" class="btn primary">Novo Agendamento</a>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="cards" id="cards">
+        <div class="card">
+          <div class="card-title">Total</div>
+          <div class="card-value" id="total">0</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Pendentes</div>
+          <div class="card-value" id="pendentes">0</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Concluídos</div>
+          <div class="card-value" id="concluidos">0</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Cancelados</div>
+          <div class="card-value" id="cancelados">0</div>
+        </div>
+      </section>
+
+      <section class="table-wrap">
+        <div class="table-controls">
+          <div></div>
+          <div class="small-note">Mostrando agendamentos</div>
+        </div>
+        <table class="table" id="agendamentosTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Profissional</th>
+              <th>Data</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </main>
+
+    <div id="loading" class="loading hidden"><div class="spinner"></div></div>
+    <div id="toast-container" class="toast-container"></div>
+  </div>
+  </body>
+    <script src="js/api.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/dashboard.js"></script>
+  </html>
+</body>
+</html>
