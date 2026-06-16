@@ -65,5 +65,5 @@ http://localhost:8000
 ## Integrantes
 
 - Raphael Alves Mendes
-- Thiago Andrade Lima
+- Tiago Andrade Lima
 - Andre Luis
