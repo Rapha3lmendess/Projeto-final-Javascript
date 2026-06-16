@@ -1,5 +1,44 @@
 const db = require('../../db/knex');
 
+function normalizePayload(body){
+  return {
+    nome: (body.nome || '').trim(),
+    telefone: (body.telefone || '').trim(),
+    profissional: (body.profissional || '').trim(),
+    data: (body.data || '').trim(),
+    hora: (body.hora || '').trim(),
+    status: (body.status || 'pendente').trim() || 'pendente'
+  };
+}
+
+function validatePayload(payload){
+  if(!payload.nome) return 'Campo nome é obrigatório';
+  if(!payload.telefone) return 'Campo telefone é obrigatório';
+  if(!payload.profissional) return 'Campo profissional é obrigatório';
+  if(!payload.data) return 'Campo data é obrigatório';
+  if(!payload.hora) return 'Campo hora é obrigatório';
+
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(payload.data)){
+    return 'Data inválida. Use o formato YYYY-MM-DD';
+  }
+
+  const [year, month, day] = payload.data.split('-').map(Number);
+  const parsed = new Date(Date.UTC(year, month - 1, day));
+  if(
+    parsed.getUTCFullYear() !== year ||
+    parsed.getUTCMonth() + 1 !== month ||
+    parsed.getUTCDate() !== day
+  ){
+    return 'Data inválida. Use uma data real no formato YYYY-MM-DD';
+  }
+
+  if(!/^\d{2}:\d{2}$/.test(payload.hora)){
+    return 'Hora inválida. Use o formato HH:MM';
+  }
+
+  return null;
+}
+
 async function list(req, res){
   try{
     const rows = await db('agendamentos').select('*').orderBy('id','desc');
@@ -18,7 +57,10 @@ async function getById(req, res){
 
 async function create(req, res){
   try{
-    const payload = req.body;
+    const payload = normalizePayload(req.body);
+    const validationError = validatePayload(payload);
+    if(validationError) return res.status(400).json({ message: validationError });
+
     const [id] = await db('agendamentos').insert(payload);
     const created = await db('agendamentos').where({ id }).first();
     res.status(201).json(created);
@@ -28,7 +70,10 @@ async function create(req, res){
 async function update(req, res){
   try{
     const { id } = req.params;
-    const payload = req.body;
+    const payload = normalizePayload(req.body);
+    const validationError = validatePayload(payload);
+    if(validationError) return res.status(400).json({ message: validationError });
+
     const affected = await db('agendamentos').where({ id }).update(payload);
     if(!affected) return res.status(404).json({ message: 'Not found' });
     const updated = await db('agendamentos').where({ id }).first();
