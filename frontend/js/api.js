@@ -1,5 +1,5 @@
 // API helper para consumir os endpoints de agendamentos
-const API_BASE = '';// deixar vazio para usar o mesmo host. Ex: 'http://localhost:3000'
+const API_BASE = 'http://localhost:3000'; // ajustar conforme o host do backend
 
 async function handleResponse(res){
   const text = await res.text();

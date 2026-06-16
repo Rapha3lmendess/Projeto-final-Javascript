@@ -14,7 +14,7 @@ async function loadDashboard(){
 function renderCards(items){
   const total = items.length;
   const pendentes = items.filter(i=>i.status==='pendente').length;
-  const concluidos = items.filter(i=>i.status==='concluido').length;
+  const concluidos = items.filter(i=>i.status==='concluido' || i.status==='finalizado').length;
   const cancelados = items.filter(i=>i.status==='cancelado').length;
   document.getElementById('total').textContent = total;
   document.getElementById('pendentes').textContent = pendentes;
@@ -24,8 +24,9 @@ function renderCards(items){
 
 function createStatusBadge(status){
   const span = document.createElement('span');
-  span.className = 'status-badge ' + (status==='pendente' ? 'status-pendente' : status==='concluido' ? 'status-concluido' : 'status-cancelado');
-  span.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+  const normalized = status === 'finalizado' ? 'concluido' : status;
+  span.className = 'status-badge ' + (normalized==='pendente' ? 'status-pendente' : normalized==='concluido' ? 'status-concluido' : 'status-cancelado');
+  span.textContent = normalized.charAt(0).toUpperCase() + normalized.slice(1);
   return span;
 }
 
