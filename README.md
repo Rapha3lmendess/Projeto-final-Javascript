@@ -10,47 +10,53 @@ O **Agenda Fácil** é um sistema web para gerenciamento de agendamentos. A apli
 
 ## Como executar
 
-1. Configure o MySQL e crie o banco `projeto_final`.
-2. No diretório `backend`, copie `.env.example` para `.env` e ajuste as credenciais.
-3. Para iniciar tudo com um comando só, use o script na raiz do projeto:
-
-```bash
-cd Projeto-final-Javascript
-./start.sh
-```
-
-4. Se preferir iniciar manualmente, siga os passos abaixo.
-5. Instale as dependências:
+1. Abra o projeto em um terminal Linux/WSL e garanta que `node` e `npm` sejam da instalação Linux, não do Windows.
+2. Instale o MySQL e crie um usuário com permissão para o banco `projeto_final`.
+3. No diretório `backend`, copie `.env.example` para `.env` e ajuste as credenciais conforme o seu banco.
+4. Instale as dependências do backend:
 
 ```bash
 cd backend
 npm install
 ```
 
-6. Rode a migration:
+5. Rode a migration para criar as tabelas no banco:
 
 ```bash
 npm run migrate
 ```
 
-7. Inicie o backend:
+6. Inicie o backend:
 
 ```bash
 npm run dev
 ```
 
-8. Em outro terminal, inicie o frontend:
+7. Em outro terminal, inicie o frontend:
 
 ```bash
 cd ../frontend
 python3 -m http.server 8000
 ```
 
-9. Abra a aplicação em:
+8. Abra a aplicação em:
 
 ```text
 http://localhost:8000
 ```
+
+## Se você acabou de clonar o projeto
+
+Use este passo a passo rápido:
+
+1. Clone o repositório e abra a pasta no VS Code em um ambiente WSL ou Linux.
+2. Verifique se o Node.js funciona com `node -v` e `npm -v`.
+3. Configure o MySQL e confirme que o usuário informado em [backend/.env](backend/.env) existe.
+4. Rode `npm install` dentro de [backend](backend).
+5. Rode `npm run migrate` dentro de [backend](backend).
+6. Inicie o backend com `npm run dev`.
+7. Inicie o frontend com `python3 -m http.server 8000` dentro de [frontend](frontend).
+8. Acesse `http://localhost:8000` no navegador.
 
 ## Endpoints da API
 
