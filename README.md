@@ -15,7 +15,7 @@ O **Agenda Fácil** é um sistema web para gerenciamento de agendamentos. A apli
 3. Para iniciar tudo com um comando só, use o script na raiz do projeto:
 
 ```bash
-cd /home/batata/Repositorios/Projeto-final-Javascript
+cd Projeto-final-Javascript
 ./start.sh
 ```
 
