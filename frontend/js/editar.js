@@ -20,7 +20,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if(!data.telefone) errors.push('Telefone obrigatório');
     if(!data.profissional) errors.push('Profissional obrigatório');
     if(!data.data) errors.push('Data obrigatória');
+    if(data.data && !/^\d{4}-\d{2}-\d{2}$/.test(data.data)) errors.push('Data inválida. Use YYYY-MM-DD');
     if(!data.hora) errors.push('Hora obrigatória');
+    if(data.hora && !/^\d{2}:\d{2}$/.test(data.hora)) errors.push('Hora inválida. Use HH:MM');
     if(errors.length){ showToast(errors.join('\n'),'error'); return; }
 
     try{ showLoading(); await apiUpdate(id,data); showToast('Agendamento atualizado'); setTimeout(()=>location.href='index.html',600); }

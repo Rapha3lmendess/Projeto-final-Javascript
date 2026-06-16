@@ -37,6 +37,8 @@ function validate(data){
   if(!/^\(\d{2}\) \d{4,5}-\d{4}$/.test(data.telefone)) errors.push('Telefone inválido');
   if(!data.profissional) errors.push('Campo Profissional é obrigatório');
   if(!data.data) errors.push('Campo Data é obrigatório');
+  if(data.data && !/^\d{4}-\d{2}-\d{2}$/.test(data.data)) errors.push('Data inválida. Use YYYY-MM-DD');
   if(!data.hora) errors.push('Campo Hora é obrigatório');
+  if(data.hora && !/^\d{2}:\d{2}$/.test(data.hora)) errors.push('Hora inválida. Use HH:MM');
   return errors;
 }
